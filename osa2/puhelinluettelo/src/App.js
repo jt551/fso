@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import PrintContacts from "./components/PrintContacts"
+import Filter from './components/Filter'
+import NewPersonForm from './components/NewPersonForm'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -47,43 +49,9 @@ const App = () => {
   return (
     <div>
     <h2>Phonebook</h2>
-    <label htmlFor="filterinput">Filter results</label>
-    <input
-            type="text"
-            className="form-control"
-            id="filterinput"
-            placeholder="Filter"
-            value={filter}
-            onChange={handleFilterChange}
-          />
-      
-         <form onSubmit={formSubmit}>
-        <div className="form-group">
-          <label htmlFor="nameinput">Add new name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="nameinput"
-            placeholder="Name"
-            value={newName}
-            onChange={handleChange}
-          />
-          <label htmlFor="phoneinput">number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="phoneinput"
-            placeholder="Number"
-            value={newNumber}
-            onChange={handleNumChange}
-          />
-        </div>
-
-        <button className="btn btn-primary btn-large form-group" type="submit">
-         Add
-        </button>
-      </form>
-      <PrintContacts contacts={persons} filter={filter}/>
+        <Filter filter={filter} handleFilterChange={handleFilterChange}/>
+        <NewPersonForm formSubmit={formSubmit} newName={newName} handleChange={handleChange} newNumber={newNumber} handleNumChange={handleNumChange}/>
+        <PrintContacts contacts={persons} filter={filter}/>
       
     </div>
   );
