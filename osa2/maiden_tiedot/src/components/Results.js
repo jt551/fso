@@ -1,5 +1,8 @@
 import React from 'react'
 import FilterCountries from './FilterCountries'
+import TooManyResults from './TooManyResults';
+import SeveralResults from './SeveralResults';
+import OneResult from './OneResult'
 
 const Results = (props) => {
     const countries = props.countries;
@@ -12,41 +15,22 @@ const Results = (props) => {
 
     if(results.length > 10){
         return (
-            <div>
-            <p>Too many results...</p>
-            </div>
+            <TooManyResults />
         )
     }
     else if(results.length < 11 && results.length > 1){
     return (
-        <div>
-            <ul>
-            {results.map((c, index) => <li key={index}>{c.name}</li>)}
-            </ul>
-        </div>
+        <SeveralResults results={results} setFilter={props.setFilter}/>
     )
     }
     else if(results.length === 1){
         return (
-            <div>
-            {results.map((c, index)=> 
-            <div key={index}>
-            <h3>{c.name}</h3>
-            <p>Capital {c.capital}</p>
-            <p>Population {c.population}</p>
-            <h4>Languages</h4>
-            <ul>
-            {c.languages.map((l, index) => <li key={index}>{l.name}</li>)}
-            </ul>
-            <img src={c.flag} alt="Flag" width="150" height="100" />
-            </div>
-            )}
-            </div>
+           <OneResult results={results} /> 
         )
     }
     return (
         <div>
-            <p>Default</p>
+            <p>No Results</p>
         </div>
     )
         

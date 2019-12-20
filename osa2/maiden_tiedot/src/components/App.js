@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div>
      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
-     <Results countries={countries} filter={filter} />
+     <Results countries={countries} filter={filter} setFilter={setFilter}/>
     </div>
   );
 }
