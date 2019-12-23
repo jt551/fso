@@ -3,9 +3,11 @@ import axios from 'axios'
 import Filter from './Filter.js'
 import Results from './Results.js'
 
+
 const App = () => {
   const [countries, setCountries] = useState([]) 
   const [filter, setFilter] = useState('')
+  
   
   useEffect(() => {
     axios
@@ -23,6 +25,7 @@ const App = () => {
     <div>
      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
      <Results countries={countries} filter={filter} setFilter={setFilter}/>
+    
     </div>
   );
 }

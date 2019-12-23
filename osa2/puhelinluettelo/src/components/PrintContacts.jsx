@@ -7,6 +7,8 @@ import PrintContact from './PrintContact'
 const PrintContacts = (props) => {
   const prefilter = props.contacts;
   const filter = props.filter;
+  console.log("printcontacts props ", props);
+  
   
   const result = FilterItems(prefilter, filter);
   console.log(result);

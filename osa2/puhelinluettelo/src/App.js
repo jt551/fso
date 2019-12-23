@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PrintContacts from "./components/PrintContacts"
 import Filter from './components/Filter'
 import NewPersonForm from './components/NewPersonForm'
-import axios from 'axios'
+import jsonService from './services/Contacts'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,11 +11,11 @@ const App = () => {
   const [ filter, setFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
+    jsonService
+      .getAll()
+      .then(response => setPersons(response))
+      .catch(error => console.log(error)
+      )
   }, [])
 
   const handleChange = (event) => {
@@ -42,9 +42,15 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      setPersons(persons.concat(contactObject))
-      setNewName('')
-      setNewNumber('')
+      jsonService
+      .create(contactObject)
+      .then(response => {
+        setPersons(persons.concat(response))
+        setNewName("");
+      setNewNumber("");
+      })
+
+      
     }
            
     }
