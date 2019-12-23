@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Filter from './Filter.js'
 import Results from './Results.js'
-
+import CapitalWeather from './CapitalWeather'
 
 const App = () => {
   const [countries, setCountries] = useState([]) 
   const [filter, setFilter] = useState('')
+  const [forecast, setForecast] = useState({})
   
   
   useEffect(() => {
@@ -24,8 +25,8 @@ const App = () => {
   return (
     <div>
      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
-     <Results countries={countries} filter={filter} setFilter={setFilter}/>
-    
+     <Results countries={countries} filter={filter} setFilter={setFilter} setForecast={setForecast}/>
+     <CapitalWeather forecast={forecast} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Forecast from './Forecast'
 
 const OneResult = ( props ) => {
   
@@ -16,6 +17,7 @@ const OneResult = ( props ) => {
               ))}
             </ul>
             <img src={c.flag} alt="Flag" width="150" height="100" />
+            <Forecast city={c.capital} setForecast={props.setForecast}/>
           </div>
         ))}
       </div>

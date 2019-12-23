@@ -25,7 +25,7 @@ const Results = (props) => {
     }
     else if(results.length === 1){
         return (
-           <OneResult results={results} /> 
+           <OneResult results={results} setForecast={props.setForecast}/> 
         )
     }
     return (
