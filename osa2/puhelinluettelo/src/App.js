@@ -61,7 +61,7 @@ const App = () => {
     <h2>Phonebook</h2>
         <Filter filter={filter} handleFilterChange={handleFilterChange}/>
         <NewPersonForm formSubmit={formSubmit} newName={newName} handleChange={handleChange} newNumber={newNumber} handleNumChange={handleNumChange}/>
-        <PrintContacts contacts={persons} filter={filter}/>
+        <PrintContacts contacts={persons} filter={filter} persons={persons} setPersons={setPersons}/>
       
     </div>
   );
