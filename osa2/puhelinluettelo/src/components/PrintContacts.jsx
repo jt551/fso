@@ -9,8 +9,8 @@ const PrintContacts = (props) => {
   const prefilter = props.contacts;
   const filter = props.filter;
   
-  const removeContact = (id) => {
-    if(window.confirm("Remove this contact?")){
+  const removeContact = (id, name) => {
+    if(window.confirm(`Remove contact ${name}?`)){
       const rm = jsonService.remove(id);
       rm
       .then(console.log(rm))
@@ -29,7 +29,7 @@ const PrintContacts = (props) => {
           
             {result.map((res, index )=>
             <div className="row" key={index}>
-               <PrintContact key={res.name} name={res.name} number={res.number}/> <button className="btn btn-outline-danger btn-sm" onClick={()=> removeContact(res.id)}>Delete</button>
+               <PrintContact key={res.name} name={res.name} number={res.number}/> <button className="btn btn-outline-danger btn-sm" onClick={()=> removeContact(res.id, res.name)}>Delete</button>
             </div>)}
           
         </div>

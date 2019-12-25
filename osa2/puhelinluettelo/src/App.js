@@ -36,7 +36,19 @@ const App = () => {
     })
     
     if(search){
-      window.alert(newName + ' already exists.');
+      if(window.confirm(`${newName} exists, do you want to update the number?`)){
+      const updateobj = persons.find(def => def.name === newName)
+      updateobj.number = newNumber
+      jsonService
+      .update(updateobj.id, updateobj)
+      .then(response => {
+        setPersons(persons.map(person => person.id !== updateobj.id ? person : response ))
+        setNewName('')
+        setNewNumber('')
+      })
+      .catch(err => console.log(err)
+      )
+      }
     } else{
       const contactObject = {
         name: newName,
@@ -49,6 +61,8 @@ const App = () => {
         setNewName("");
       setNewNumber("");
       })
+      .catch(err => console.log(err)
+      )
 
       
     }
