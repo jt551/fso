@@ -8,7 +8,7 @@ const NewPersonForm = (props) => {
           <label htmlFor="nameinput">Add new name</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control col-lg-4"
             id="nameinput"
             placeholder="Name"
             value={props.newName}
@@ -17,7 +17,7 @@ const NewPersonForm = (props) => {
           <label htmlFor="phoneinput">number</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control col-lg-4"
             id="phoneinput"
             placeholder="Number"
             value={props.newNumber}

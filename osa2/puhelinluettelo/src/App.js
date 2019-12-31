@@ -3,19 +3,25 @@ import PrintContacts from "./components/PrintContacts"
 import Filter from './components/Filter'
 import NewPersonForm from './components/NewPersonForm'
 import jsonService from './services/Contacts'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ filter, setFilter] = useState('')
+  const [errorMsg, setErrorMsg] = useState(null)
+  const [notifyMsg, setNotifyMsg] = useState(null)
 
   useEffect(() => {
     jsonService
       .getAll()
       .then(response => setPersons(response))
-      .catch(error => console.log(error)
-      )
+      .catch(error => {setErrorMsg('connection error')
+      setTimeout(()=> {
+        setErrorMsg(null)
+      }, 3000)
+    })
   }, [])
 
   const handleChange = (event) => {
@@ -43,11 +49,19 @@ const App = () => {
       .update(updateobj.id, updateobj)
       .then(response => {
         setPersons(persons.map(person => person.id !== updateobj.id ? person : response ))
+        setNotifyMsg(`${newName} updated`)
         setNewName('')
         setNewNumber('')
+        setTimeout(()=> {
+          setNotifyMsg(null)
+        }, 3000)
       })
-      .catch(err => console.log(err)
-      )
+      .catch(error => {
+        setErrorMsg('update error')
+        setTimeout(()=> {
+          setErrorMsg(null)
+        }, 3000)
+      })
       }
     } else{
       const contactObject = {
@@ -58,11 +72,18 @@ const App = () => {
       .create(contactObject)
       .then(response => {
         setPersons(persons.concat(response))
+        setNotifyMsg(`${newName} created`)
         setNewName("");
-      setNewNumber("");
+        setNewNumber("");
+        setTimeout(()=> {
+          setNotifyMsg(null)
+        }, 3000)
       })
-      .catch(err => console.log(err)
-      )
+      .catch(error => {setErrorMsg('error while creating entry')
+        setTimeout(()=> {
+          setErrorMsg(null)
+        }, 3000)
+      })
 
       
     }
@@ -73,9 +94,10 @@ const App = () => {
   return (
     <div>
     <h2>Phonebook</h2>
+        <Notification message={notifyMsg} err={errorMsg}/>
         <Filter filter={filter} handleFilterChange={handleFilterChange}/>
         <NewPersonForm formSubmit={formSubmit} newName={newName} handleChange={handleChange} newNumber={newNumber} handleNumChange={handleNumChange}/>
-        <PrintContacts contacts={persons} filter={filter} persons={persons} setPersons={setPersons}/>
+        <PrintContacts contacts={persons} filter={filter} persons={persons} setPersons={setPersons} setNotifyMsg={setNotifyMsg} setErrorMsg={setErrorMsg}/>
       
     </div>
   );
