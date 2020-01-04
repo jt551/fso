@@ -79,7 +79,8 @@ const App = () => {
           setNotifyMsg(null)
         }, 3000)
       })
-      .catch(error => {setErrorMsg('error while creating entry')
+      .catch(error => 
+        {setErrorMsg(error.response.data)
         setTimeout(()=> {
           setErrorMsg(null)
         }, 3000)
@@ -94,11 +95,10 @@ const App = () => {
   return (
     <div>
     <h2>Phonebook</h2>
-        <Notification message={notifyMsg} err={errorMsg}/>
-        <Filter filter={filter} handleFilterChange={handleFilterChange}/>
+        <Notification message={notifyMsg} err={errorMsg}/>        
         <NewPersonForm formSubmit={formSubmit} newName={newName} handleChange={handleChange} newNumber={newNumber} handleNumChange={handleNumChange}/>
+        <Filter filter={filter} handleFilterChange={handleFilterChange}/>
         <PrintContacts contacts={persons} filter={filter} persons={persons} setPersons={setPersons} setNotifyMsg={setNotifyMsg} setErrorMsg={setErrorMsg}/>
-      
     </div>
   );
 
