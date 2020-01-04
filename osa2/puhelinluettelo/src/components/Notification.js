@@ -5,7 +5,7 @@ const Notification = (props) => {
     if( props.message === null && props.err === null){
         return null
     }
-    else if( props.message && props.err){
+    /*else if( props.message && props.err){
         return (
           <div>
             <div className="error">
@@ -16,7 +16,7 @@ const Notification = (props) => {
             </div>
           </div>
         );
-    }
+    }*/
     else if (props.message){
         return(
         <div className="notify">

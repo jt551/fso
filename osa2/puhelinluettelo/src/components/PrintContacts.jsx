@@ -28,8 +28,7 @@ const PrintContacts = (props) => {
   }  
   
   const result = FilterItems(prefilter, filter);
-  console.log(result);
-  
+   
     return (
         <div>
           <h1>Contacts</h1>
